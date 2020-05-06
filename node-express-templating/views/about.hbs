@@ -1,9 +1,17 @@
-<html>
-  <head> </head>
-  <body>
-    <h1>{{ name }}</h1>
-    <span>My age is {{ age }}</span>
-    <br />
-    <p>I live in {{ location.city }}, {{ location.country }}</p>
-  </body>
-</html>
+<h1>{{ name }}</h1>
+<span>My age is {{ age }}</span>
+<br />
+<p>I live in {{ location.city }}, {{ location.country }}</p>
+<strong class="special">This tag is going to be green</strong>
+<ul>
+  {{#each pets}}
+    <li>
+      {{> pet}}
+    </li>
+  {{/each}}
+</ul>
+
+
+<script>
+  console.log('This script is only present in the about route');
+</script>

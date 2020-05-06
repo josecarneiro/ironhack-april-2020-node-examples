@@ -1,9 +1,12 @@
 const express = require('express');
+const hbs = require('hbs');
 
 const app = express();
 
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
+
+hbs.registerPartials(__dirname + '/views/partials');
 
 app.get('/', (request, response) => {
   response.render('index', { message: 'My name is José' });
@@ -28,7 +31,24 @@ app.get('/about', (request, response) => {
     location: {
       city: 'Lisbon',
       country: 'Portugal'
-    }
+    },
+    pets: [
+      {
+        name: 'Panda',
+        species: 'dog',
+        wellBehaved: true
+      },
+      {
+        name: 'Pipoca',
+        species: 'dog',
+        wellBehaved: false
+      },
+      {
+        name: 'Whiskers',
+        species: 'cat',
+        wellBehaved: false
+      }
+    ]
   });
 });
 

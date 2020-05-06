@@ -1,0 +1,11 @@
+<strong>{{ name }} is a {{ species }}</strong>
+<br />
+<small>{{ name }} is a {{#if wellBehaved}}good{{else}}bad{{/if}} {{ species }}</small>
+<small>{{ name }} is a {{#unless wellBehaved}}bad{{else}}good{{/unless}} {{ species }}</small>
+<br />
+{{#if @first}}
+  <em>This is my first pet</em>
+{{/if}}
+{{#if @last}}
+  <em>This is my last pet</em>
+{{/if}}

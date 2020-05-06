@@ -1,10 +1,10 @@
 {
-  "name": "node-express-templating",
+  "name": "node-pokedex",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js -e js,hbs",
+    "dev": "nodemon app.js -e js,json,hbs,css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "hbs": "^4.1.1"
+    "hbs": "^4.1.1",
+    "pokedex": "^1.1.0"
   }
 }
