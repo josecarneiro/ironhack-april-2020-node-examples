@@ -1,10 +1,24 @@
 const express = require('express');
+const hbs = require('hbs');
 const axios = require('axios');
+const path = require('path');
+
+// Required so that environment variables in .env file
+// become available to node app
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 
+console.log(process.env);
+
+const apiKey = process.env.OMDB_API_KEY;
+
 app.set('view engine', 'hbs');
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
+// app.set('views', __dirname + '/views');
+
+hbs.registerPartials(__dirname + '/views/partials');
 
 app.use(express.static('public'));
 
@@ -15,7 +29,7 @@ app.get('/', (request, response) => {
 app.get('/results', (request, response) => {
   const term = request.query.term;
   axios
-    .get(`http://www.omdbapi.com/?apikey=c90b8787&s=${term}`)
+    .get(`http://www.omdbapi.com/?apikey=${apiKey}&s=${term}`)
     .then(result => {
       const data = result.data;
       const searchResults = data.Search;
@@ -30,7 +44,7 @@ app.get('/results', (request, response) => {
 
 app.get('/:id', (request, response) => {
   const id = request.params.id;
-  const url = 'http://www.omdbapi.com/?apikey=c90b8787&i=' + id;
+  const url = `http://www.omdbapi.com/?apikey=${apiKey}&i=` + id;
   axios
     .get(url)
     .then(result => {

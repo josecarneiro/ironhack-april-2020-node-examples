@@ -4,12 +4,7 @@
   {{#each results}}
     <li class="movie-item">
       <a href="/{{ imdbID }}">
-        <img src="{{ Poster }}" alt="{{ Title }}"/>
-        <div class="movie-details">
-          <strong>{{ Title }}</strong>
-          <br>
-          <small>{{ Year }}</small>
-        </div>
+        {{> movieitem}}
       </a>
     </li>
   {{/each}}
