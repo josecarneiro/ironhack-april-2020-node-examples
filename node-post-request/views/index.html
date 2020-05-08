@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/book/create" method="POST">
+      <label for="title-input">Book Title</label>
+      <input id="title-input" type="text" name="title" placeholder="Title" />
+
+      <label for="author-input">Book Author</label>
+      <input id="author-input" type="text" name="author" placeholder="Author" />
+
+      <label for="page-count-input">Page Count</label>
+      <input id="page-count-input" type="number" name="page-count" placeholder="Page Count" />
+
+      <button>Submit Book</button>
+    </form>
+  </body>
+</html>
