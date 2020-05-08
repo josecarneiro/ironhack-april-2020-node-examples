@@ -1,1 +1,9 @@
-Hello world
+<h3>Popular Channels</h3>
+
+<ul>
+  {{#each channels}}
+    <li>
+      <a href="/channel/{{ _id }}">{{name}}</a>
+    </li>
+  {{/each}}
+</ul>

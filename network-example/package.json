@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js -e js,json,hbs,css,scss",
+    "dev": "nodemon server.js -e js,json,hbs,scss",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
