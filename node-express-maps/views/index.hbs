@@ -1,0 +1,81 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+<div id="map-container"></div>
+
+<button id="trigger-location">Locate Me</button>
+
+<form action="/restaurant/search" class="search">
+
+  <input required id="latitude-input" type="text" name="latitude" placeholder="Latitude">
+  <input required id="longitude-input" type="text" name="longitude" placeholder="Longitude">
+  <input required id="distance-input" type="number" min="0" max="20000" name="distance" placeholder="Distance">
+
+  <button>Search</button>
+</form>
+
+<script>
+  function initMap () {
+    const $mapContainer = document.getElementById('map-container');
+
+    const $inputLatitude = document.getElementById('latitude-input');
+    const $inputLongitude = document.getElementById('longitude-input');
+
+    const $triggerLocation = document.getElementById('trigger-location');
+
+    const map = new window.google.maps.Map($mapContainer, {
+      center: { lat: 38.75, lng: -9.15 },
+      zoom: 8
+    });
+
+    let marker;
+
+    function setNewLocation (latitude, longitude) {
+      $inputLatitude.value = Number(latitude).toFixed(2);
+      $inputLongitude.value = Number(longitude).toFixed(2);
+      
+      if (marker) {
+        marker.setMap(null);
+      }
+
+      marker = new window.google.maps.Marker({
+        map,
+        position: {
+          lat: latitude,
+          lng: longitude
+        }
+      });
+    }
+    
+    map.addListener('click', event => {
+      const latitude = event.latLng.lat();
+      const longitude = event.latLng.lng();
+
+      setNewLocation(latitude, longitude);
+    });
+
+    /*
+    const geolocate = () => new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
+    geolocate()
+      .then(result => {
+        // ...
+      })
+      .catch(error => {
+        // ...
+      })
+    */
+
+    $triggerLocation.addEventListener('click', () => {
+
+      navigator.geolocation.getCurrentPosition(result => {
+        const latitude = result.coords.latitude;
+        const longitude = result.coords.longitude;
+        setNewLocation(latitude, longitude);
+      }, error => {
+        console.log(error);
+      });
+    });
+  }
+</script>
+
+{{> mapscript}}
