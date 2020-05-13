@@ -2,6 +2,10 @@
 
 <h1>{{ restaurant.name }}</h1>
 
+<form action="/restaurant/{{ restaurant._id }}/delete" method="POST">
+  <submit>Delete</submit>
+</form>
+
 <script>
   const restaurant =  {{{ json restaurant }}};
 
