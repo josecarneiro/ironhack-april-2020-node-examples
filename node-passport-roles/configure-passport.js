@@ -37,6 +37,7 @@ passport.use(
     },
     (request, email, password, callback) => {
       const name = request.body.name;
+      const role = request.body.role;
 
       bcrypt
         .hash(password, 10)
@@ -44,6 +45,7 @@ passport.use(
           return User.create({
             name,
             email,
+            role,
             passwordHash: hashAndSalt
           });
         })

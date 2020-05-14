@@ -3,18 +3,23 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+  email: {
+    type: String
+  },
   name: {
     type: String
   },
-  email: {
+  photo: {
+    type: String
+  },
+  githubId: {
+    type: String
+  },
+  username: {
     type: String
   },
   passwordHash: {
     type: String
-  },
-  role: {
-    type: String,
-    enum: ['teacher', 'student', 'program_manager']
   }
 });
 
