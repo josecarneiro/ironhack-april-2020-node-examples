@@ -30,34 +30,40 @@ passport.deserializeUser((id, callback) => {
 
 passport.use(
   'sign-up',
-  new LocalStrategy({}, (username, password, callback) => {
-    console.log(username, password);
-    bcrypt
-      .hash(password, 10)
-      .then(hashAndSalt => {
-        return User.create({
-          username,
-          passwordHash: hashAndSalt
+  new LocalStrategy(
+    {
+      passReqToCallback: true,
+      usernameField: 'email'
+    },
+    (request, email, password, callback) => {
+      const name = request.body.name;
+
+      bcrypt
+        .hash(password, 10)
+        .then(hashAndSalt => {
+          return User.create({
+            name,
+            email,
+            passwordHash: hashAndSalt
+          });
+        })
+        .then(user => {
+          callback(null, user);
+        })
+        .catch(error => {
+          callback(error);
         });
-      })
-      .then(user => {
-        callback(null, user);
-      })
-      .catch(error => {
-        callback(error);
-      });
-  })
+    }
+  )
 );
 
 passport.use(
   'sign-in',
   new LocalStrategy(
     {
-      passReqToCallback: true
+      usernameField: 'email'
     },
-    (request, a, password, callback) => {
-      const email = request.body.email;
-
+    (email, password, callback) => {
       let user;
       User.findOne({
         email
