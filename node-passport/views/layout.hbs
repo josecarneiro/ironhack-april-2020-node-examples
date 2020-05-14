@@ -13,6 +13,7 @@
       {{#if user}}
         <!-- <a href="/">{{user.name}}'s Profile</a> -->
         <form action="/authentication/sign-out" method="POST">
+          <a href="#">{{ user.username }}'s Profile</a>
           <button>Sign Out</button>
         </form>
         {{else}}

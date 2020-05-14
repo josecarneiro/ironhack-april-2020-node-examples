@@ -19,6 +19,8 @@ const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js')
 const indexRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 
+const passport = require('passport');
+
 const app = express();
 
 app.set('views', join(__dirname, 'views'));
@@ -54,6 +56,15 @@ app.use(
     })
   })
 );
+
+require('./configure-passport');
+
+// Passport relies on express session, needs to mounted afterwards
+
+// 2 - Mount passport as middleware on our application.
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(bindUserToViewLocals);
 
